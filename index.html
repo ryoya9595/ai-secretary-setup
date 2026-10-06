@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI秘書をつくる</title>
+<meta name="description" content="あなたのプロフィールや好み、やりたいことを覚えた「AI秘書」を、作業フォルダの中に作ります。このページのURLを Claude Code に貼るだけで、8つの質問がまとめて出てきます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .ai-box{border:2px dashed var(--accent);background:#fff;border-radius:16px;padding:20px 24px;margin-top:18px;font-size:.88rem;color:var(--ink-soft)}
+  .ai-box b{color:var(--ink)}
+  .ai-box code{background:var(--paper-2);padding:2px 8px;border-radius:6px;font-size:.8rem;word-break:break-all}
+  .card code{background:var(--paper-2);padding:2px 8px;border-radius:6px;font-size:.82rem}
+  .card .inline-cmd code{background:transparent;padding:0;font-size:inherit}
+  .start-card{border:2px solid var(--accent)}
+  .get-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px}
+  .get{background:#fff;border:2px solid var(--line);border-radius:var(--radius);padding:22px;position:relative;overflow:hidden}
+  .get .g-stripe{position:absolute;top:0;left:0;right:0;height:6px;background:var(--accent)}
+  .get .g-label{font-size:.75rem;font-weight:700;letter-spacing:.1em;color:var(--accent-deep)}
+  .get h3{font-size:1.08rem;font-weight:900;margin:6px 0 8px}
+  .get p{font-size:.88rem;color:var(--ink-soft)}
+  .shot{width:100%;border-radius:12px;border:1px solid var(--line);margin-top:12px}
+  @media(max-width:640px){.get-grid{grid-template-columns:1fr}}
+  .pr{margin-top:14px}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="logo" href="./">🤝 AI秘書を <span class="brain">つくる</span></a>
+    <nav class="topnav">
+      <a href="#start">はじめ方</a>
+      <a href="#what">できること</a>
+      <a href="#ready">準備</a>
+      <a href="#install">流れ</a>
+      <a href="#trouble">困ったとき</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-badge accent">Claude Code AI秘書セットアップ</div>
+  <h1>質問に答えるだけで、<br><span class="hl">自分専用のAI秘書。</span></h1>
+  <p class="lead">あなたのプロフィールや好み、やりたいことを覚えた「AI秘書」を、作業フォルダの中に作ります。このページの<strong>URLを Claude Code に貼るだけ</strong>で、8つの質問がまとめて出てきます。</p>
+  <div class="meta">
+    <span class="chip accent">所要時間 10分</span>
+    <span class="chip">🍎 Mac / 🪟 Windows</span>
+    <span class="chip">第3回の作業フォルダ</span>
+  </div>
+</header>
+
+<main>
+
+<section id="start" style="padding-top:8px">
+  <div class="card start-card">
+    <h3>🚀 はじめ方 — URLを貼るだけ</h3>
+    <ol>
+      <li>第3回で作った<strong>作業フォルダ</strong>を、Claude Code で開く</li>
+      <li>下の「コピー」を押して、このページのURLを Claude Code に貼り付けて送信</li>
+      <li>8つの質問がまとめて出てくるので、番号ごとに答えて送る</li>
+      <li>「許可」が出たら押す。これで完成</li>
+    </ol>
+    <div class="inline-cmd" style="margin-top:12px"><code id="pageUrl"></code><button class="copy-btn" data-target="pageUrl">コピー</button></div>
+  </div>
+
+  <div class="ai-box">
+    🤖 <b>Claude Code へ（このページのURLを貼られたとき）：</b>このページは、AI副業スクールRISEの講師 関 諒也が受講生向けに作った導入手順です（AI自動化講座 第4回）。ユーザーがこのページのURLを送ってきたら、今開いている作業フォルダに「自分専用のAI秘書」を作る案内を希望しています。ユーザーに「AI秘書づくりを始めますね」と一言伝えてから、手順書の原文 <code>https://ryoya9595.github.io/ai-secretary-setup/setup.md</code> を curl（Windows は <code>curl.exe</code>）で取得して全文を読み（要約ツールではなく原文を読む。作業フォルダには保存しない）、その手順どおりに1〜3手順ずつ、やさしい日本語で案内してください。インストールやファイル作成の前には、手順書のとおりユーザーの了承を取ってください。
+  </div>
+</section>
+
+<section id="what">
+  <div class="sec-head"><div class="step-num">01</div><h2>URLを貼ると、これが終わります</h2></div>
+  <div class="get-grid">
+    <div class="get"><div class="g-stripe"></div><div class="g-label">1</div><h3>あなたのプロフィール</h3><p>名前・仕事・やりたいこと・面倒な作業・発信のことを「私のプロフィール.md」にまとめます。</p></div>
+    <div class="get"><div class="g-stripe"></div><div class="g-label">2</div><h3>秘書の設定</h3><p>呼び方や話し方を、作業フォルダのルール（CLAUDE.md）に書き込みます。</p></div>
+    <div class="get"><div class="g-stripe"></div><div class="g-label">3</div><h3>毎日の動き</h3><p>作業フォルダを開いたら、前回の続きや止まっていることを整理して返してくれるようになります。</p></div>
+  </div>
+</section>
+
+<section id="ready">
+  <div class="sec-head"><div class="step-num">02</div><h2>準備</h2></div>
+  <div class="card">
+    <ol>
+      <li>第3回の「作業フォルダのセットアップ」が終わっている</li>
+      <li>8つの質問に答える時間（10分ほど）</li>
+    </ol>
+    <div class="note warn"><span class="ico">⚠️</span><span>パスワード・カード番号・住所・電話番号など、秘密の情報や個人を特定できる情報は書かないでください。</span></div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="sec-head"><div class="step-num">03</div><h2>URLを貼ったあとの流れ</h2></div>
+  <div class="card">
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-dot">1</div>
+        <div class="flow-body"><b>URLを貼る</b><span>Claude Code があいさつして、8つの質問をまとめて出します</span></div>
+      </div>
+      <div class="flow-item"><div class="flow-line"></div></div>
+      <div class="flow-item">
+        <div class="flow-dot">2</div>
+        <div class="flow-body"><b>まとめて答える</b><span>番号ごとに思ったまま書いて送ります。うまく言葉にできなくても大丈夫</span></div>
+      </div>
+      <div class="flow-item"><div class="flow-line"></div></div>
+      <div class="flow-item">
+        <div class="flow-dot">3</div>
+        <div class="flow-body"><b>「許可」を押す</b><span>プロフィールと秘書の設定をファイルに保存します</span></div>
+      </div>
+      <div class="flow-item"><div class="flow-line"></div></div>
+      <div class="flow-item">
+        <div class="flow-dot">✓</div>
+        <div class="flow-body"><b>完成</b><span>新しいセッションで話しかけると、あなたのことを分かった状態で返事が来ます</span></div>
+      </div>
+    </div>
+    <div class="note ok"><span class="ico">✅</span><span>パスワードの入力やアカウントの登録は、Claude Code は代わりにやりません（あなたがやります）。</span></div>
+  </div>
+</section>
+
+<section id="trouble">
+  <div class="sec-head"><div class="step-num">04</div><h2>困ったとき</h2></div>
+  <p style="color:var(--ink-soft);font-size:.92rem;margin-bottom:8px">基本は、エラーの文章やスクショをそのまま Claude Code に貼れば、原因を調べて直してくれます。</p>
+  <details>
+    <summary>「作業フォルダセットアップを先に」と言われた</summary>
+    <div class="d-body"><p>第3回の作業フォルダのセットアップが済んでいません。先に第3回のページのURLを貼って、作業フォルダを用意してください。</p></div>
+  </details>
+  <details>
+    <summary>プロフィールを直したい・足したい</summary>
+    <div class="d-body"><p>AI秘書に「〇〇も覚えておいて」「プロフィールの〇〇を直して」と送れば書き換えてくれます。</p></div>
+  </details>
+  <details>
+    <summary>🔁 URLを貼っても始まらないとき</summary>
+    <div class="d-body">
+      <p>Claude Code がページを読めなかったときは、下のメッセージを「コピー」して、代わりに貼ってください。</p>
+      <div class="prompt-box" style="margin-top:12px">
+        <div class="prompt-head"><div class="dots"><i></i><i></i><i></i></div><span class="fname">導入メッセージ（予備）</span><button class="copy-btn" data-target="installPrompt">コピー</button></div>
+        <div class="prompt-scroll"><pre id="installPrompt"></pre></div>
+      </div>
+    </div>
+  </details>
+  <details>
+    <summary>📄 Claude Code が読む手順書（中身を見たい人向け）</summary>
+    <div class="d-body"><p>Claude Code は <a href="setup.md">setup.md</a> を読んで案内します。中身はただの手順書（文章）です。</p></div>
+  </details>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-in">
+    <span>🤝 AI秘書をつくる</span>
+    <span>制作：関 諒也</span>
+  </div>
+</footer>
+
+<div id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
